@@ -1,3 +1,25 @@
+
+def get_not_very_effective_types(t):
+    not_very_effective_types = []
+    if t == "steel":
+        not_very_effective_types.append("ice")
+        not_very_effective_types.append("steel")
+        not_very_effective_types.append("rock")
+        not_very_effective_types.append("electric")
+        not_very_effective_types.append("poison")
+        not_very_effective_types.append("grass")
+        not_very_effective_types.append("bug")
+        not_very_effective_types.append("normal")
+        not_very_effective_types.append("psychic")
+        not_very_effective_types.append("flying")
+        not_very_effective_types.append("dragon")
+    elif t == "flying":
+        not_very_effective_types.append("fighting")
+        not_very_effective_types.append("grass")
+        not_very_effective_types.append("bug")
+
+    return not_very_effective_types
+
 def get_super_effective_types(t):
     super_effective_types = []
     if t == "fire":
@@ -78,16 +100,22 @@ while not user_exit:
         second_type = input("")
         second_type_super_effective_types = get_super_effective_types(second_type)
 
+        first_type_resists = get_not_very_effective_types(enemy_type)
+        second_type_resists = get_not_very_effective_types(second_type)
+
+
         super_effective_types = []
         quad_effective_types = []
         for t in first_type_super_effective_types:
             if t in second_type_super_effective_types:
                 quad_effective_types.append(t)
-            else:
+            elif t not in second_type_resists:
                 super_effective_types.append(t)
         for t in second_type_super_effective_types:
-            if t not in super_effective_types and t not in quad_effective_types:
+            if t not in super_effective_types and t not in quad_effective_types and t not in first_type_resists:
                 super_effective_types.append(t)
+
+
 
         print("These types are super effective")
         for t in super_effective_types:
